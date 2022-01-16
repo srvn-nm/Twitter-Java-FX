@@ -5,6 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+/**
+ * first menu handler
+ */
 public class FirstMenu{
 
     @FXML
@@ -14,8 +17,6 @@ public class FirstMenu{
     private Label welcomeText;
 
     @FXML
-    void onHelloButtonClick(ActionEvent event) {
-
-    }
+    void onHelloButtonClick(ActionEvent event) {}
 
 }
