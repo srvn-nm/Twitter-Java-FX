@@ -1,5 +1,8 @@
 package org.ce.ap.com.company.client;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -9,7 +12,7 @@ import java.net.Socket;
  * @version 2.0  2021-12-20
  */
 
-public class Client{
+public class Client extends Application {
 
     public static ConsoleViewService viewService = new ConsoleViewService();
     public static void main(String[] args) {
@@ -21,7 +24,7 @@ public class Client{
                 String temp = "Socket Information : "+clientSocket.toString()+"\r\n";
                 fileOutputStream.write(temp);
             } catch (IOException e) {
-                System.out.println();
+                e.printStackTrace();
             }
 
             //server message to client --> Menu,tweets,search ...
@@ -29,11 +32,17 @@ public class Client{
             //out put choice --> menu server
             OutputStream outputs = clientSocket.getOutputStream();
 
-            String FXMLAddress = viewService.consoleInputPrint(inputMenu,outputs);
+            //viewService.consolePrint(inputMenu,outputs,args);
+            //System.out.println(FXMLAddress);
 
         }catch (Exception runTimeError){
             runTimeError.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        viewService.consolePrint(inputMenu,outputs,args);
     }
 }

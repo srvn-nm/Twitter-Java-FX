@@ -30,7 +30,7 @@ public class ClientHandler extends Connections implements Runnable {
     public void run() {
         try {
 
-            byte[] buffer = new byte[2048];
+
             ArrayList<String> savedLine = new ArrayList<String>();
             int index = 0;
 
@@ -38,8 +38,8 @@ public class ClientHandler extends Connections implements Runnable {
 
             while (true) {
                 outputStream("FirstMenu.fxml");
-                int read = in.read(buffer);
-                String receivedMessage = new String(buffer, 0, read);
+
+                String receivedMessage = inputStream();
 
                 System.out.println("RECV from "+clientNum+": " + receivedMessage);
                 savedLine.add(receivedMessage);
@@ -74,7 +74,7 @@ public class ClientHandler extends Connections implements Runnable {
             try {
                 connectionSocket.close();
             } catch (IOException error) {
-                System.err.println(error);
+                error.printStackTrace();
             }
         }
     }
