@@ -4,21 +4,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-/**
- * first menu handler
- */
-public class FirstMenu{
+public class LogIn {
 
     @FXML
-    private Button LogIn;
+    private Button LogInButton;
 
     @FXML
     private VBox LogInWindow;
 
     @FXML
-    private Button SignUp;
+    private PasswordField Password;
+
+    @FXML
+    private TextField UserName;
 
     @FXML
     private Label welcomeText;

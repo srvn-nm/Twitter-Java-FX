@@ -7,18 +7,21 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
- * first menu handler
+ * this class will help us to control the Chat room Menu page
  */
-public class FirstMenu{
+public class ChatRoomMenu {
 
     @FXML
-    private Button LogIn;
+    private Button Exit;
+
+    @FXML
+    private Button JoinChat;
 
     @FXML
     private VBox LogInWindow;
 
     @FXML
-    private Button SignUp;
+    private Button NewChat;
 
     @FXML
     private Label welcomeText;

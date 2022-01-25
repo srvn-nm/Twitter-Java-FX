@@ -1,4 +1,4 @@
 package com.fxcode.twitterjavafx;
 
-public class PaintOne {
+public class SignUpThird {
 }
