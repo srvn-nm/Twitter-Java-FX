@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -16,7 +17,7 @@
          </stylesheets>
          <children>
             <Circle fx:id="Circle" fill="#2197ff" layoutX="95.0" layoutY="100.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label fx:id="name" layoutX="14.0" layoutY="200.0" prefHeight="46.0" prefWidth="81.0" style="-fx-background-color: #d8d8d8;" textFill="#1da1f2">
+            <Label fx:id="name" layoutX="14.0" layoutY="200.0" prefHeight="46.0" prefWidth="81.0" textFill="#1da1f2">
                <effect>
                   <InnerShadow />
                </effect>
@@ -24,8 +25,8 @@
                   <Font name="System Bold" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="username" layoutX="18.0" layoutY="246.0" prefHeight="24.0" prefWidth="73.0" style="-fx-background-color: #d8d8d8;" />
-            <Label fx:id="bio" layoutX="29.0" layoutY="270.0" prefHeight="54.0" prefWidth="539.0" style="-fx-background-color: #d8d8d8;" />
+            <Label fx:id="username" layoutX="18.0" layoutY="246.0" prefHeight="24.0" prefWidth="73.0" />
+            <Label fx:id="bio" layoutX="29.0" layoutY="270.0" prefHeight="54.0" prefWidth="539.0" />
             <VBox fx:id="tweetBox" layoutX="16.0" layoutY="323.0" prefHeight="176.0" prefWidth="567.0" />
          </children></AnchorPane>
    </content>

@@ -4,3 +4,6 @@
 .sideMenu {
     -fx-background-image:url("../../../Images/img.png");
 }
+.help {
+    -fx-background-image:url("../../../Images/im1.png");
+}

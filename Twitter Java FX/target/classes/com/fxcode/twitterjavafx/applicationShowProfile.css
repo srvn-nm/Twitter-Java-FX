@@ -1,3 +1,6 @@
 .anchor {
     -fx-background-image:url("../../../Images/images0.png");
 }
+.sideMenu {
+    -fx-background-image:url("../../../Images/img.png");
+}
