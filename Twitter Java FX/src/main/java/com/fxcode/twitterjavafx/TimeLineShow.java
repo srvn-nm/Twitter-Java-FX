@@ -14,4 +14,5 @@ public class TimeLineShow {
     @FXML public BorderPane massges;
     @FXML public Button Exit;
     @FXML public ScrollBar scroll;
+    @FXML public Button Refresh;
 }
