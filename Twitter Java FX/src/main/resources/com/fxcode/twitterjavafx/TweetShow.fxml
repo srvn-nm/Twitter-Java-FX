@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.fxcode.twitterjavafx.TweetShow"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@applicationShowProfile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fxcode.twitterjavafx.TweetShow">
+   <children>
+      <Label fx:id="userName" layoutX="43.0" layoutY="45.0" prefHeight="25.0" prefWidth="185.0">
+         <font>
+            <Font name="System Italic" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="tweet" layoutX="43.0" layoutY="122.0" prefHeight="181.0" prefWidth="533.0" />
+      <Label fx:id="time" layoutX="313.0" layoutY="80.0" prefHeight="18.0" prefWidth="275.0" />
+   </children>
 </AnchorPane>
