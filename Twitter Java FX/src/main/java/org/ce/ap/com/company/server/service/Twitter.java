@@ -49,7 +49,7 @@ public class Twitter implements TwitterService {
     private Label welcomeText;
 
     //client nUmber
-    int clientNumber;
+    int clientNumber ;
 
     /**
      *Server Constructor
@@ -67,26 +67,15 @@ public class Twitter implements TwitterService {
         clientStatusHandlr = new ClentFileHandler();
     }
 
-    /**
-     * this main controller will help us to use FXML
-     * @param handler ,
-     * @param clientNumber ,
-     */
     public void mainController(ClientHandler handler , int clientNumber){
 
         clientStatusHandlr.newClient(clientNumber);
         while (true){
             String Status = clientStatusHandlr.getStatus(clientNumber);
             handler.outputStream(Status);
-            String newStatus = handler.inputStream();
-            clientStatusHandlr.updateClient(clientNumber,newStatus);
         }
-    }
-
-    public void ChatRoomClick(ActionEvent actionEvent) {
 
     }
-
 
     /**
      * this method is the main part of program Where the user can choose what he/she wants to do
@@ -273,5 +262,6 @@ public class Twitter implements TwitterService {
         }
     }
 
-
+    public void ChatRoomClick(ActionEvent actionEvent) {
+    }
 }

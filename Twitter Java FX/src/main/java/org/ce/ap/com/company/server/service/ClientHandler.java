@@ -11,6 +11,8 @@ public class ClientHandler extends Connections implements Runnable {
     private InputStream in;
     private OutputStream out;
 
+
+
     public ClientHandler(Socket connectionSocket, int clientNum , InputStream in, OutputStream out) {
 
         super(connectionSocket,clientNum ,in,out);
@@ -86,5 +88,4 @@ public class ClientHandler extends Connections implements Runnable {
             }
         }
     }
-
 }

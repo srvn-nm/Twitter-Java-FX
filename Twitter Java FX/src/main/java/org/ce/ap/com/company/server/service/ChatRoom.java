@@ -132,14 +132,6 @@ public class ChatRoom extends ChatRoomFile {
         setTitle(title);
     }
 
-    //Chat Room
-
-    public void setMassges(BorderPane Pane) {
-        massges.getChildren().add(Pane);
-    }
-
-
-
     /**
      * this method will help us to chat in specific chat room
      * @param user
