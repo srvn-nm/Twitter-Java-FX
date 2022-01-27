@@ -12,6 +12,7 @@ import java.net.Socket;
 public class Client{
 
     public static ConsoleViewService viewService = new ConsoleViewService();
+
     public static void main(String[] args) {
         try(Socket clientSocket = new Socket("127.0.0.1",8080)) {
             //writing setting properties

@@ -22,7 +22,6 @@ import javafx.scene.layout.VBox;
  */
 public class Twitter implements TwitterService {
 
-    @FXML public Button sideMenu;
     private Tweeting tweeting;
     private TimeLine showingTable;
     private final Authentication service;//log in and sign up service
@@ -57,21 +56,21 @@ public class Twitter implements TwitterService {
     //client Number
     int clientNumber;
 
+
+
     /**
      * this method will set Log In and SignUp Menu
      * @param actionEvent ,
-     * @param clientNumber ,
      */
-    public void LogInCheck(ActionEvent actionEvent,int clientNumber) {
+    public void LogInCheck(ActionEvent actionEvent) {
         clientStatusHandler.updateServerFXML(clientNumber,"FirstMenu","LogIn.fxml");
     }
 
     /**
      * this method will set Log In and SignUp Menu
      * @param actionEvent ,
-     * @param clientNumber ,
      */
-    public void SignUpCheck(ActionEvent actionEvent,int clientNumber) {
+    public void SignUpCheck(ActionEvent actionEvent) {
         clientStatusHandler.updateServerFXML(clientNumber,"FirstMenu","SignUpSecond.fxml");
     }
 
@@ -109,6 +108,11 @@ public class Twitter implements TwitterService {
         }
     }
 
+
+    /**
+     * this me
+     * @param actionEvent
+     */
     public void ChatRoomClick(ActionEvent actionEvent) {
 
     }
@@ -227,16 +231,6 @@ public class Twitter implements TwitterService {
                     responseJSONHandler.writeToFile(responseJSONHandler.JSONMaker(false,new Errortype(errorcode,"timeline shown successful"),1,result));
                     errorcode++;
                 }
-                else if(choice.equals("8")){
-                    Chatroom(user,handler);
-                    ArrayList<String> parameters = new ArrayList<>();
-                    parameters.add("username: "+user.getUserName());
-                    requestJSONHandler.writeToFile(requestJSONHandler.JSONMaker("chatroom","a submitted user can chat in chatroom",parameters));
-                    ArrayList<String> result = new ArrayList<>();
-                    result.add(user.toString());
-                    responseJSONHandler.writeToFile(responseJSONHandler.JSONMaker(false,new Errortype(errorcode,"chatting successful"),1,result));
-                    errorcode++;
-                }
                 else {
                     break;
                 }
@@ -281,24 +275,34 @@ public class Twitter implements TwitterService {
         tweeting.update();
     }
 
-    /**
-     * in this method we will show chats menu
-     */
-    public void Chatroom(Account user, ClientHandler handler){
-        while (true){
-            handler.outputStream("1)New chat\n2)Join Chat\nEny Other Keyboard : Exit");
-            String choice = handler.inputStream();
-            if (choice.equals("1")) {
 
-            } else if (choice.equals("2")) {
-                //chatRoom.JoinChat(user,handler);
-            }
-            else{
-                break;
-            }
-        }
+    /***
+     * this method will help us to manage side button
+     * @param actionEvent ,
+     */
+    public void sideMenuButtonChatRoomClick(ActionEvent actionEvent) {
     }
 
-    public void sideMenuButton(ActionEvent actionEvent) {
+    /**
+     * this method will help us to control chat menu
+     * @param actionEvent ,
+     */
+    public void ChatRoomClickCreate(ActionEvent actionEvent) {
+
+    }
+
+    /**
+     * this method will help us to control chat menu
+     * @param actionEvent ,
+     */
+    public void ChatRoomClickJion(ActionEvent actionEvent) {
+
+    }
+
+    /**
+     * this method will help us to control chat menu
+     * @param actionEvent ,
+     */
+    public void ChatRoomClickExit(ActionEvent actionEvent) {
     }
 }

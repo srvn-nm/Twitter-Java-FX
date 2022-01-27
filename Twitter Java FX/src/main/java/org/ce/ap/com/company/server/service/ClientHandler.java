@@ -11,8 +11,13 @@ public class ClientHandler extends Connections implements Runnable {
     private InputStream in;
     private OutputStream out;
 
-
-
+    /**
+     * constructor
+     * @param connectionSocket ,
+     * @param clientNum ,
+     * @param in ,
+     * @param out ,
+     */
     public ClientHandler(Socket connectionSocket, int clientNum , InputStream in, OutputStream out) {
 
         super(connectionSocket,clientNum ,in,out);
@@ -28,18 +33,23 @@ public class ClientHandler extends Connections implements Runnable {
      * @param clientNum ,
      */
     public void NewClient(int clientNum){
-        NewFile("./src/main/resources/ServerClientFxml"+"FirstMenu-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"ChatRoom-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"ChatRoomMenu-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"CreatNewChat-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"JoinChatRoom-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"LogIn-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"Massage-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"Search-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"ShowProfile-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"SignUpFirst-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"SignUpSecond-"+clientNum+".txt");
-        NewFile("./src/main/resources/ServerClientFxml"+"SignUpThird-"+clientNum+".txt");
+
+        //Client Fxmls --> help to save controller data
+        NewFile("./src/main/resources/ServerClientFxml/"+"FirstMenu-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"ChatRoom-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"ChatRoomMenu-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"CreatNewChat-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"JoinChatRoom-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"LogIn-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"Massage-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"Search-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"ShowProfile-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"SignUpFirst-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"SignUpSecond-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"SignUpThird-"+clientNum+".txt");
+        //Client User Details
+        NewFile("./src/main/resources/ClientStatusProperties/"+"ClientUser-"+clientNum+".txt");
+
     }
 
     /***
@@ -48,7 +58,7 @@ public class ClientHandler extends Connections implements Runnable {
      */
     public void NewFile(String path){
         File file = new File(path);
-        try(FileWriter newFileWriter = new FileWriter(file,false)){
+        try(FileWriter newFileWriter = new FileWriter(path,false)){
             newFileWriter.write("new client ...");
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,12 +68,12 @@ public class ClientHandler extends Connections implements Runnable {
     @Override
     public void run() {
         try {
+            NewClient(clientNum);
             byte[] buffer = new byte[2048];
             ArrayList<String> savedLine = new ArrayList<String>();
             int index = 0;
-            Twitter service = new Twitter(clientNum ,this);
+            Twitter service = new Twitter(clientNum,this);
             while (true) {
-
                 service.mainController(this, clientNum);
                 int read = in.read(buffer);
                 String receivedMessage = new String(buffer, 0, read);
@@ -88,4 +98,5 @@ public class ClientHandler extends Connections implements Runnable {
             }
         }
     }
+
 }

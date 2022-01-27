@@ -1,5 +1,7 @@
 package org.ce.ap.com.company.server.service;
 
+import org.ce.ap.com.company.server.model.Account;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class ClientFileHandler {
 
     }
 
-    /*
+    /***
      * this method will help us to update client Status
      * @param clientNumber ,
      * @param NewStatus ,
@@ -86,7 +88,7 @@ public class ClientFileHandler {
 
     }
 
-    /*
+    /***
      * this method will set current client number
      * @param currentClient ,
      */
@@ -122,7 +124,7 @@ public class ClientFileHandler {
         return number;
     }
 
-    /*
+    /***
      * this method will update Fxml files for client
      * @param clientNumber ,
      * @param FxmlName ,
@@ -137,7 +139,7 @@ public class ClientFileHandler {
         }
     }
 
-    /*
+    /***
      * this method will return Fxml details
      * @param clientNumber ,
      * @param FxmlName  ,
@@ -174,7 +176,7 @@ public class ClientFileHandler {
         }
     }
 
-    /*
+    /***
      * this mehtod will get client number of fxml
      * @param FxmlName ,
      * @return fxml client number
@@ -195,5 +197,44 @@ public class ClientFileHandler {
 
         return ClientNumber;
     }
+
+    /**
+     * this methods will help us to save Client Handler New Account
+     * @param clientNumber ,
+     * @param NewUser ,
+     */
+    public void NewUserAccount(int clientNumber, String NewUser){
+        String path ="./src/main/resources/ClientAccounts/Account-"+clientNumber+".txt";
+        try(FileWriter fileOutputStream = new FileWriter(path,false)){
+            fileOutputStream.write(NewUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * this method will return the Account UserName Of Client
+     * @param clientNumber ,
+     * @return the Account UserName Of Client
+     */
+    public String getUserAccount(int clientNumber){
+        String path ="./src/main/resources/ClientAccounts/Account-"+clientNumber+".txt";
+        File file = new File(path);
+        String status = "" ;
+        try(BufferedReader StatusFile = new BufferedReader(new FileReader(file))){
+            String readString ;
+            while ((readString = StatusFile.readLine()) != null){
+                status =  readString;
+            }
+        }
+        catch (Exception error){
+            System.out.println();
+        }
+
+        return status;
+    }
+
+
+
 
 }

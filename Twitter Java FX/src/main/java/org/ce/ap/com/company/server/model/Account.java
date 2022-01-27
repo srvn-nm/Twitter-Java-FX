@@ -147,13 +147,13 @@ public class Account implements Serializable {
      *
      * @param password ,
      */
-    public void setPassword(String password, ClientHandler clientHandler) {
+    public void setPassword(String password) {
         try {
             Password = toHexString(getSHA(password));
         }
         // For specifying wrong message digest algorithms
         catch (NoSuchAlgorithmException e) {
-            clientHandler.outputStream("Exception thrown for incorrect algorithm: " + e);
+            System.out.println();
         }
     }
 

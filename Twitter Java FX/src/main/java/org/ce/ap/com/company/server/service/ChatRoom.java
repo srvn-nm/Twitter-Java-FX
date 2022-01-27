@@ -1,8 +1,6 @@
 package org.ce.ap.com.company.server.service;
 
 import javafx.event.ActionEvent;
-import javafx.scene.shape.Rectangle;
-import org.ce.ap.com.company.server.model.Account;
 import java.util.ArrayList;
 
 import javafx.fxml.FXML;
@@ -18,8 +16,8 @@ import javafx.scene.text.Text;
  */
 public class ChatRoom extends ChatRoomFile {
 
-
     ArrayList<String> Title = new ArrayList<>(); // ChatRoom Titles
+    ClientFileHandler clientFileHandler = new ClientFileHandler();
 
     //ChatRoom
     @FXML
@@ -36,6 +34,10 @@ public class ChatRoom extends ChatRoomFile {
     private BorderPane massges;
     @FXML
     private ScrollBar scroll;
+    @FXML
+    private Text MsgText;
+    @FXML
+    private Text NewMassageWarning;
 
     //Create New Chat
     @FXML
@@ -57,37 +59,13 @@ public class ChatRoom extends ChatRoomFile {
     @FXML
     private Text SearchChatRoomNameWarning;
 
-    //Massages
-    @FXML
-    private Text MassageText;
-    @FXML
-    private BorderPane massgesScale;
-    @FXML
-    private Rectangle Rec;
-
-    //side Menu Button
-    @FXML
-    private Button sideMenu;
-
     private ArrayList<BorderPane> Massages = new ArrayList<>();
 
-    private ClientFileHandler clientFileHandler = new ClientFileHandler();
-    //Massages Create
-    public void MassagePreproccesor(String ChatName){
-        ArrayList<String> chats= new ArrayList<>();
-        chats.addAll(chatDetails(ChatName));
-        for(String text : chats){
-            MassageText.setText(text);
-            massgesScale.setCenter(MassageText);
-            massgesScale.setRight(Rec);
-            BorderPane massge = massgesScale;
-            Massages.add(massgesScale);
-        }
-    }
+    //Join Chat
 
     /***
      * this method will help us to join in chat rooms
-     * @param actionEvent
+     * @param actionEvent ,
      */
     public void JoinEvent(ActionEvent actionEvent) {
 
@@ -101,22 +79,8 @@ public class ChatRoom extends ChatRoomFile {
         }
     }
 
-    public void AllChatsEvent(ActionEvent actionEvent) {
-        //////////////////////////////////////////////////////////////////////////////
-    }
-
-    public void RefreshButton(ActionEvent actionEvent) {
-
-    }
-
-    public void ExitChatButton(ActionEvent actionEvent) {
-    }
-
-    public void sideMenuButton(ActionEvent actionEvent) {
-    }
-
     /**
-     * this method will help us to control (JoinChat --> search )
+     * this method will help us to control (JoinChat --> create )
      * @param actionEvent ,
      */
     public void SearchCreateButton(ActionEvent actionEvent) {
@@ -124,7 +88,83 @@ public class ChatRoom extends ChatRoomFile {
         clientFileHandler.updateClient(clientNumber,"CreatNewChat");
     }
 
+    /**
+     * this method will help us to manage sideMenu in Join ChatRoom
+     * @param actionEvent ,
+     */
+    public void sideMenuButtonJoinChat(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("ChatRoom");
+        clientFileHandler.updateClient(clientNumber,"JoinChatRoom");
+    }
+
+    //caht room
+
+    /**
+     * THIS METHOD WILL REFRESH OUR MASSAGES IN CHAT ROOM FXML
+     * @param actionEvent ,
+     */
+    public void RefreshButton(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("ChatRoom");
+        ArrayList<String> ChatName = clientFileHandler.getFXMLDetails(clientNumber,"ChatRoom");
+        GroupName.setText(ChatName.get(0));
+        ArrayList<String> chats= new ArrayList<>();
+        chats.addAll(chatDetails(ChatName.get(0)));
+        String massagesText = "" ;
+        for(String text : chats) {
+            massagesText += text ;
+        }
+
+        MsgText.setText(massagesText);
+
+    }
+
+    /**
+     * this method will help us to manage exit of chatRoom
+     * @param actionEvent ,
+     */
+    public void ExitChatButton(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("ChatRoom");
+        clientFileHandler.updateClient(clientNumber,"ChatRoomMenu");
+    }
+
+    /**
+     * this method will help us to manage sideMenu in ChatRoom
+     * @param actionEvent ,
+     */
+    public void sideMenuButtonChatRoom(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("ChatRoom");
+        clientFileHandler.updateClient(clientNumber,"sideMenu");
+    }
+
+    /**
+     * this method will help us to manage send message button
+     * @param actionEvent ,
+     */
+    public void SendMassageButton(ActionEvent actionEvent) {
+        String NewMSG = NewMassage.getText();
+        String Group = GroupName.getText();
+        if(NewMSG.isBlank()){
+            NewMassageWarning.setText("Error : Massage is Empty");
+        }
+        if(Group.isBlank()){
+            NewMassageWarning.setText("Error : Please Press Refresh Button");
+        }
+        if(!Group.isBlank() && !NewMSG.isBlank()){
+            int client =  clientFileHandler.getFxmlState("ChatRoom");
+            UpdateChatRoom(clientFileHandler.getUserAccount(client)+": " + NewMSG,Group);
+        }
+    }
+
+    public void AllChatsEvent(ActionEvent actionEvent) {
+
+    }
+
     //create chat
+
+    /**
+     * this method will help us to Create a chat
+     * @param actionEvent ,
+     */
     public void CreateEvent(ActionEvent actionEvent) {
         if(SearchChatroom(NewChatRoomName.getText())){
             CreateWarning.setText("Chat room("+NewChatRoomName.getText()+") is already exist");
@@ -136,10 +176,18 @@ public class ChatRoom extends ChatRoomFile {
     }
 
     /**
-     * this method will help us to show all titles
-     * @param handler
+     * this method will help us to manage sideMenu in Create ChatRoom
+     * @param actionEvent
      */
-    public void getTitles(ClientHandler handler) {
+    public void sideMenuButtonCreate(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("CreatNewChat");
+        clientFileHandler.updateClient(clientNumber,"JoinChatRoom");
+    }
+
+    /**
+     * this method will help us to show all titles
+     */
+    public void getTitles() {
         String showAllTitles = "";
         for(String title : Title){
             showAllTitles += title+"\n";
@@ -150,7 +198,6 @@ public class ChatRoom extends ChatRoomFile {
         Title.add(title);
     }
 
-
     /**
      * this method will add a new chat room to server
      * @param title,
@@ -159,45 +206,5 @@ public class ChatRoom extends ChatRoomFile {
         NewChatRoom(title);
         setTitle(title);
     }
-
-    //Chat Room
-
-    public void setMassges(BorderPane Pane) {
-        massges.getChildren().add(Pane);
-    }
-
-
-    /**
-     * this method will help us to chat in specific chat room
-     * @param user
-     * @param handler
-     * @param title
-     */
-    public void chatRoom(Account user , ClientHandler handler,String title){
-        boolean Refresh = false;
-        //String chatMassages = chatDetails(title);
-        while (true){
-            handler.outputStream("--> \"Twitter\"\nChat room("+title+") :\n"+chatDetails(title));
-            handler.outputStream("\n1)Refresh\n2)new massage\nEny Other Keyboard : Exit");
-            String choice = handler.inputStream();
-            if (choice.equals("1")) {
-                Refresh = true;
-            } else if (choice.equals("2")) {
-                handler.outputStream("Please Write your new massage:");
-                String massage = handler.inputStream();
-
-                UpdateChatRoom(user.getUserName()+": " + massage,title);
-            }
-            else{
-                break;
-            }
-        }
-
-        if(Refresh){
-            chatRoom(user ,handler,title);
-        }
-    }
-
-
 
 }

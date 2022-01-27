@@ -18,6 +18,6 @@
         </ImageView>
         <Text layoutX="10.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="please pay attention :Your new group name should not be duplicate" wrappingWidth="578.9366760253906" />
         <Text fx:id="CreateWarning" fill="RED" layoutX="64.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="374.39999999999986" />
-        <Button fx:id="sideMenu" layoutX="469.0" layoutY="364.0" mnemonicParsing="false" onAction="#sideMenuButton" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #1c93c4;" text="sideMenu" textFill="WHITE" />
+        <Button fx:id="sideMenu" layoutX="469.0" layoutY="364.0" mnemonicParsing="false" onAction="#sideMenuButtonCreate" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #1c93c4;" text="sideMenu" textFill="WHITE" />
     </children>
 </AnchorPane>

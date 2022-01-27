@@ -21,6 +21,6 @@
         <Text layoutX="46.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You can also create new groups" wrappingWidth="246.13674926757812" />
         <Button fx:id="SearchCreateButton" layoutX="469.0" layoutY="263.0" mnemonicParsing="false" onAction="#SearchCreateButton" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #1c93c4;" text="Create" textFill="WHITE" />
         <Text fx:id="SearchChatRoomNameWarning" fill="RED" layoutX="46.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="374.39999999999986" />
-        <Button fx:id="sideMenu" layoutX="469.0" layoutY="350.0" mnemonicParsing="false" onAction="#sideMenuButton" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #1c93c4;" text="sideMenu" textFill="WHITE" />
+        <Button fx:id="sideMenu" layoutX="469.0" layoutY="350.0" mnemonicParsing="false" onAction="#sideMenuButtonJoinChat" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #1c93c4;" text="sideMenu" textFill="WHITE" />
     </children>
 </AnchorPane>

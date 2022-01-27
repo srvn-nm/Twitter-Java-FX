@@ -224,7 +224,7 @@ public class Tweeting implements TweetingService {
 
     }
 
-    public void TweetPreproccesor(){
+    public void TweetProcessor(){
         tweets.clear();
         tweets = new ArrayList<Tweet>(timeLine.allTweets);
         // create a toggle group
@@ -280,7 +280,7 @@ public class Tweeting implements TweetingService {
     @FXML
     public void RefreshFX(ActionEvent event) {
         timeLine.showTimeLine(UserName.getText(),clientHandler);
-        TweetPreproccesor();
+        TweetProcessor();
     }
 
     @FXML
@@ -326,6 +326,6 @@ public class Tweeting implements TweetingService {
     @FXML
     public void initialize() {
         timeLine.showTimeLine(UserName.getText(),clientHandler);
-        TweetPreproccesor();
+        TweetProcessor();
     }
 }

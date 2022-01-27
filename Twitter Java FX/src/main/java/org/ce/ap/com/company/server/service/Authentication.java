@@ -31,10 +31,6 @@ import javafx.scene.text.Text;
 
 public class Authentication implements AuthenticationService {
 
-    @FXML public Button sideMenuLogIn;
-    @FXML public Button sideMenuSignup;
-    @FXML public Button sideMenuSign2;
-    @FXML public Button sideMenuSign3;
     //Log In Section
     @FXML
     private Button CreateNewAccount;
@@ -126,6 +122,7 @@ public class Authentication implements AuthenticationService {
         boolean passwordCheck = passwordCheckForLogIn(PasswordLogIn.getText());
         if(UserNameCheck && passwordCheck){
             int clientNumber = clientFileHandler.getFxmlState("LogIn");
+            clientFileHandler.NewUserAccount(clientNumber,UserNameLogIn.getText());
             clientFileHandler.updateClient(clientNumber,"TimeLineShow");
         }
         if(!UserNameCheck){
@@ -374,7 +371,7 @@ public class Authentication implements AuthenticationService {
             int clientNumber = clientFileHandler.getFxmlState("SignUpThird");
             clientFileHandler.updateClient(clientNumber,"TimeLine"); ////////////////////////////////////////////////// Time Line ...
             clientFileHandler.updateServerFXML(clientNumber,"SignUpThird",UserData);
-            //clientFileHandler.NewUser(clientNumber);  --> use file to save all details
+            NewAccountFxmlFile(clientNumber);
         }
         if(!BioCheck){
             BioWarning.setText("Bio len is more than 256 char limit");
@@ -495,7 +492,7 @@ public class Authentication implements AuthenticationService {
 
     /**
      * Here we check password quality for user secure
-     * @param password
+     * @param password ,
      */
     public boolean passwordQualityCheck(String password) {
 
@@ -546,7 +543,7 @@ public class Authentication implements AuthenticationService {
 
     /**
      * Bio check will check the length of user Bio
-     * @param bio
+     * @param bio ,
      * @return tocheck (false --> Bio len is more than 256 char limit )
      */
     public boolean bioCheck(String bio) {
@@ -562,7 +559,6 @@ public class Authentication implements AuthenticationService {
      * @param user --> deleted account
      */
     public void removeAccount(Account user){
-
         String usernameFollow = user.getUserName();
         Iterator<Account> it = twitterUsers.iterator();
         while (it.hasNext()) {
@@ -581,13 +577,14 @@ public class Authentication implements AuthenticationService {
         twitterUsers.addAll(usersFileManger.AllUsers());
     }
 
-    //side menu button
+    //First side menu button
     /**
      * this method will help us to manage side menu in log in
      * @param actionEvent ,
      */
     public void sideMenuButton(ActionEvent actionEvent) {
-
+        int clientNumber = clientFileHandler.getFxmlState("LogIn");
+        clientFileHandler.updateClient(clientNumber,"SideMenu");
     }
 
     /**
@@ -595,7 +592,8 @@ public class Authentication implements AuthenticationService {
      * @param actionEvent ,
      */
     public void sideMenuButtonSign3(ActionEvent actionEvent) {
-
+        int clientNumber = clientFileHandler.getFxmlState("SignUpThird");
+        clientFileHandler.updateClient(clientNumber,"SideMenu");
     }
 
     /**
@@ -603,14 +601,34 @@ public class Authentication implements AuthenticationService {
      * @param actionEvent ,
      */
     public void sideMenuButtonSign1(ActionEvent actionEvent) {
-
+        int clientNumber = clientFileHandler.getFxmlState("SignUpSecond");
+        clientFileHandler.updateClient(clientNumber,"SideMenu");
     }
 
-    /***
+    /**
      * this method will help us to manage side menu in sign 1
      * @param actionEvent ,
      */
     public void sideMenuButtonSign2(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("SignUpFirst");
+        clientFileHandler.updateClient(clientNumber,"SideMenu");
+    }
 
+    /**
+     * this method will help us to create a new account
+     * @param clientNumber ,
+     */
+    public void NewAccountFxmlFile(int clientNumber){
+        ArrayList<String> NewUsersDetails = new ArrayList<>();
+        NewUsersDetails.addAll(clientFileHandler.getFXMLDetails(clientNumber,"SignUpSecond"));
+        NewUsersDetails.addAll(clientFileHandler.getFXMLDetails(clientNumber,"SignUpFirst"));
+        NewUsersDetails.addAll(clientFileHandler.getFXMLDetails(clientNumber,"SignUpThird"));
+        Account NewUser = new Account(NewUsersDetails.get(2),NewUsersDetails.get(3),NewUsersDetails.get(0));
+        NewUser.setPassword(NewUsersDetails.get(1));
+        String Date = NewUsersDetails.get(4) +"-" + NewUsersDetails.get(5) +"-" + NewUsersDetails.get(6) +"-" ;
+        NewUser.setBirthDayDate(Date);
+        NewUser.setBio(NewUsersDetails.get(7));
+        usersFileManger.newUser(NewUser);
+        clientFileHandler.NewUserAccount(clientNumber,NewUser.getUserName());
     }
 }

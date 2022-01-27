@@ -23,7 +23,6 @@ import javafx.scene.text.Text;
  */
 public class Observer implements ObserverService {
 
-    @FXML public Button sideMenu;
     private ArrayList<Account> twitterUsers;//this array will save all sign up users
     private TimeLine showingTable;
     private Tweeting tweeting;
