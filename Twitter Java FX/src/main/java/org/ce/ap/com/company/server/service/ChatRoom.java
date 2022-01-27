@@ -1,6 +1,5 @@
 package org.ce.ap.com.company.server.service;
 
-import com.fxcode.twitterjavafx.Massage;
 import javafx.event.ActionEvent;
 import javafx.scene.shape.Rectangle;
 import org.ce.ap.com.company.server.model.Account;
@@ -67,6 +66,8 @@ public class ChatRoom extends ChatRoomFile {
     private Rectangle Rec;
 
     private ArrayList<BorderPane> Massages = new ArrayList<>();
+
+    private ClientFileHandler clientFileHandler = new ClientFileHandler();
     //Massages Create
     public void MassagePreproccesor(String ChatName){
         ArrayList<String> chats= new ArrayList<>();
@@ -80,20 +81,33 @@ public class ChatRoom extends ChatRoomFile {
         }
     }
 
+    /***
+     * this method will help us to join in chat rooms
+     * @param actionEvent
+     */
     public void JoinEvent(ActionEvent actionEvent) {
 
         if(!SearchChatroom(SearchChatRoomName.getText())){
             SearchChatRoomNameWarning.setText("Chat room("+SearchChatRoomName.getText()+") isnt already exist");
         }
         else{
-            // next State chat room
+            int clientNumber = clientFileHandler.getFxmlState("JoinChatRoom");
+            clientFileHandler.updateClient(clientNumber,"ChatRoom");
+            clientFileHandler.updateServerFXML(clientNumber,"JoinChatRoom",SearchChatRoomName.getText());
         }
     }
 
     public void AllChatsEvent(ActionEvent actionEvent) {
+        //////////////////////////////////////////////////////////////////////////////
     }
 
+    /**
+     * this method will help us to control (JoinChat --> search )
+     * @param actionEvent ,
+     */
     public void SearchCreateButton(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("JoinChatRoom");
+        clientFileHandler.updateClient(clientNumber,"CreatNewChat");
     }
 
     //create chat
@@ -131,6 +145,14 @@ public class ChatRoom extends ChatRoomFile {
         NewChatRoom(title);
         setTitle(title);
     }
+
+    //Chat Room
+
+    public void setMassges(BorderPane Pane) {
+        massges.getChildren().add(Pane);
+    }
+
+
 
     /**
      * this method will help us to chat in specific chat room

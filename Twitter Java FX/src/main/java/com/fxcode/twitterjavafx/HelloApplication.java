@@ -11,8 +11,8 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SignUpSecond.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Twiteer");
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Twitter");
         stage.setScene(scene);
         stage.show();
     }

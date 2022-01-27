@@ -34,7 +34,7 @@ public class Twitter implements TwitterService {
     public int errorcode = 0;
     private final Setting setting;
 
-    private ClentFileHandler clientStatusHandlr ; //client status handler
+    private ClientFileHandler clientStatusHandlr ; //client status handler
 
     //ChatRoomFirstMenu
     @FXML
@@ -64,7 +64,7 @@ public class Twitter implements TwitterService {
         chatRoom = new ChatRoom();
         setting = new Setting();
         this.clientNumber = clientNumber ;
-        clientStatusHandlr = new ClentFileHandler();
+        clientStatusHandlr = new ClientFileHandler();
     }
 
     public void mainController(ClientHandler handler , int clientNumber){
