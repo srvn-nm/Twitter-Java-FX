@@ -1,5 +1,6 @@
 package org.ce.ap.com.company.server.service;
 
+import javafx.event.ActionEvent;
 import org.ce.ap.com.company.server.impl.ObserverService;
 import org.ce.ap.com.company.server.model.Account;
 import org.ce.ap.com.company.server.model.TimeLine;
@@ -22,6 +23,7 @@ import javafx.scene.text.Text;
  */
 public class Observer implements ObserverService {
 
+    @FXML public Button sideMenu;
     private ArrayList<Account> twitterUsers;//this array will save all sign up users
     private TimeLine showingTable;
     private Tweeting tweeting;
@@ -244,5 +246,8 @@ public class Observer implements ObserverService {
         twitterUsers.clear();
         twitterUsers.addAll(usersFileManger.AllUsers());
         tweeting.update();
+    }
+
+    public void sideMenuButton(ActionEvent actionEvent) {
     }
 }

@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fxcode.twitterjavafx.TimeLineShow">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ce.ap.com.company.server.model.TimeLine">
     <children>
         <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../Images/logo.png" />
+                <Image url="@../Images/logo.png" />
             </image>
         </ImageView>
         <Text layoutX="86.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Timeline:" wrappingWidth="134.93663024902344">

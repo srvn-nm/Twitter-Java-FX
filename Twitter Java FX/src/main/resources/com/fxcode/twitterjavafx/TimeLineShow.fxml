@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fxcode.twitterjavafx.TimeLineShow">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ce.ap.com.company.server.service.Tweeting">
     <children>
         <ImageView fitHeight="65.0" fitWidth="67.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -28,11 +28,11 @@
         </Text>
         <VBox layoutX="1.0" layoutY="56.0" prefHeight="201.0" prefWidth="74.0">
             <children>
-                <Button fx:id="Reply" mnemonicParsing="false" prefHeight="39.0" prefWidth="122.0" style="-fx-background-color: #1c93c4;" text="Reply" textFill="WHITE" />
-                <Button fx:id="Retweet" mnemonicParsing="false" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Retweet" textFill="WHITE" />
-            <Button fx:id="Like" mnemonicParsing="false" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Like" textFill="WHITE" />
-            <Button fx:id="Refresh" mnemonicParsing="false" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Refresh" textFill="WHITE" />
-            <Button fx:id="Exit" mnemonicParsing="false" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Exit" textFill="WHITE" />
+                <Button fx:id="Reply" mnemonicParsing="false" onAction="#ReplyFX" prefHeight="39.0" prefWidth="122.0" style="-fx-background-color: #1c93c4;" text="Reply" textFill="WHITE" />
+                <Button fx:id="Retweet" mnemonicParsing="false" onAction="#RetweetFX" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Retweet" textFill="WHITE" />
+            <Button fx:id="Like" mnemonicParsing="false" onAction="#LikeFX" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Like" textFill="WHITE" />
+            <Button fx:id="Refresh" mnemonicParsing="false" onAction="#RefreshFX" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Refresh" textFill="WHITE" />
+            <Button fx:id="Exit" mnemonicParsing="false" onAction="#ExitFX" prefHeight="40.0" prefWidth="78.0" style="-fx-background-color: #1c93c4;" text="Exit" textFill="WHITE" />
             </children>
         </VBox>
         <BorderPane fx:id="massges" layoutX="79.0" layoutY="56.0" prefHeight="302.0" prefWidth="522.0">

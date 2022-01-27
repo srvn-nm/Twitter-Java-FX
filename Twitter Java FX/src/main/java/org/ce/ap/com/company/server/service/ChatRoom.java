@@ -65,6 +65,10 @@ public class ChatRoom extends ChatRoomFile {
     @FXML
     private Rectangle Rec;
 
+    //side Menu Button
+    @FXML
+    private Button sideMenu;
+
     private ArrayList<BorderPane> Massages = new ArrayList<>();
 
     private ClientFileHandler clientFileHandler = new ClientFileHandler();
@@ -99,6 +103,16 @@ public class ChatRoom extends ChatRoomFile {
 
     public void AllChatsEvent(ActionEvent actionEvent) {
         //////////////////////////////////////////////////////////////////////////////
+    }
+
+    public void RefreshButton(ActionEvent actionEvent) {
+
+    }
+
+    public void ExitChatButton(ActionEvent actionEvent) {
+    }
+
+    public void sideMenuButton(ActionEvent actionEvent) {
     }
 
     /**
@@ -153,7 +167,6 @@ public class ChatRoom extends ChatRoomFile {
     }
 
 
-
     /**
      * this method will help us to chat in specific chat room
      * @param user
@@ -184,6 +197,7 @@ public class ChatRoom extends ChatRoomFile {
             chatRoom(user ,handler,title);
         }
     }
+
 
 
 }

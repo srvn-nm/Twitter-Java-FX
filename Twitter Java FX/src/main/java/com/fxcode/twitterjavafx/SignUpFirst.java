@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 
 public class SignUpFirst {
 
+    @FXML public Button FirstBack;
     @FXML
     private TextField LastName;
 

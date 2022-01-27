@@ -1,9 +1,14 @@
 package org.ce.ap.com.company.server.service;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import org.ce.ap.com.company.server.impl.TweetingService;
 import org.ce.ap.com.company.server.model.Account;
+import org.ce.ap.com.company.server.model.TimeLine;
 import org.ce.ap.com.company.server.model.Tweet;
 
 import java.util.ArrayList;
@@ -21,9 +26,17 @@ public class Tweeting implements TweetingService {
     public ArrayList<Account> users;
     private final TweetFile tweetFile;
     private final AccountFile usersFileManger ;
-    @FXML public Label userName;
-    @FXML public Label tweet;
-    @FXML public Label time;
+    private TimeLine timeLine;
+    public ClientFileHandler clientFileHandler;
+    @FXML
+    public Text UserName;
+    @FXML public Button Reply;
+    @FXML public Button Retweet;
+    @FXML public Button Like;
+    @FXML public BorderPane massges;
+    @FXML public Button Exit;
+    @FXML public ScrollBar scroll;
+    @FXML public Button Refresh;
 
     /**
      * constructor
@@ -32,6 +45,8 @@ public class Tweeting implements TweetingService {
         users = new ArrayList<>();
         tweetFile = new TweetFile();
         usersFileManger = new AccountFile();
+        timeLine = new TimeLine();
+        clientFileHandler = new ClientFileHandler();
     }
     /**
      * THIS METHOD WILL LIKE A TWEET.
@@ -188,6 +203,32 @@ public class Tweeting implements TweetingService {
     public void update() {
         users.clear();
         users.addAll(usersFileManger.AllUsers());
+
+    }
+
+    @FXML
+    public void ExitFX(ActionEvent event) {
+            int clientNumber = clientFileHandler.getFxmlState("LogIn");
+            clientFileHandler.updateClient(clientNumber,"TimeLineShow");
+    }
+
+    @FXML
+    public void LikeFX(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void RefreshFX(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void ReplyFX(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void RetweetFX(ActionEvent event) {
 
     }
 }

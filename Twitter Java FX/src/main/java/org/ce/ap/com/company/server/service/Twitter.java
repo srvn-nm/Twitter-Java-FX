@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
  */
 public class Twitter implements TwitterService {
 
+    @FXML public Button sideMenu;
     private Tweeting tweeting;
     private TimeLine showingTable;
     private final Authentication service;//log in and sign up service
@@ -34,7 +35,7 @@ public class Twitter implements TwitterService {
     public int errorcode = 0;
     private final Setting setting;
 
-    private ClientFileHandler clientStatusHandlr ; //client status handler
+    private ClientFileHandler clientStatusHandler ; //client status handler
 
     //ChatRoomFirstMenu
     @FXML
@@ -42,14 +43,37 @@ public class Twitter implements TwitterService {
     @FXML
     private Button JoinChat;
     @FXML
+    private Button NewChat;
+
+
+    //log in sign up menu
+    @FXML
+    private Button LogIn;
+    @FXML
     private VBox LogInWindow;
     @FXML
-    private Button NewChat;
-    @FXML
-    private Label welcomeText;
+    private Button SignUp;
 
-    //client nUmber
-    int clientNumber ;
+    //client Number
+    int clientNumber;
+
+    /**
+     * this method will set Log In and SignUp Menu
+     * @param actionEvent ,
+     * @param clientNumber ,
+     */
+    public void LogInCheck(ActionEvent actionEvent,int clientNumber) {
+        clientStatusHandler.updateServerFXML(clientNumber,"FirstMenu","LogIn.fxml");
+    }
+
+    /**
+     * this method will set Log In and SignUp Menu
+     * @param actionEvent ,
+     * @param clientNumber ,
+     */
+    public void SignUpCheck(ActionEvent actionEvent,int clientNumber) {
+        clientStatusHandler.updateServerFXML(clientNumber,"FirstMenu","SignUpSecond.fxml");
+    }
 
     /**
      *Server Constructor
@@ -64,18 +88,31 @@ public class Twitter implements TwitterService {
         chatRoom = new ChatRoom();
         setting = new Setting();
         this.clientNumber = clientNumber ;
-        clientStatusHandlr = new ClientFileHandler();
+        clientStatusHandler = new ClientFileHandler();
     }
 
+    /**
+     * this main controller will help us to use FXML
+     * @param handler ,
+     * @param clientNumber ,
+     */
     public void mainController(ClientHandler handler , int clientNumber){
 
-        clientStatusHandlr.newClient(clientNumber);
+        clientStatusHandler.newClient(clientNumber);
         while (true){
-            String Status = clientStatusHandlr.getStatus(clientNumber);
+            //Client Number
+            clientStatusHandler.CurrentClient(clientNumber);
+            String Status = clientStatusHandler.getStatus(clientNumber);
             handler.outputStream(Status);
+            String newStatus = handler.inputStream();
+            clientStatusHandler.updateClient(clientNumber,newStatus);
         }
+    }
+
+    public void ChatRoomClick(ActionEvent actionEvent) {
 
     }
+
 
     /**
      * this method is the main part of program Where the user can choose what he/she wants to do
@@ -262,6 +299,6 @@ public class Twitter implements TwitterService {
         }
     }
 
-    public void ChatRoomClick(ActionEvent actionEvent) {
+    public void sideMenuButton(ActionEvent actionEvent) {
     }
 }

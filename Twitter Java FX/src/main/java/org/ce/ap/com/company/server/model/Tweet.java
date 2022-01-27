@@ -1,5 +1,7 @@
 package org.ce.ap.com.company.server.model;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import org.ce.ap.com.company.server.service.ClientHandler;
 
 import java.io.Serializable;
@@ -17,6 +19,13 @@ public class Tweet implements Serializable {
     private String text;
     private String time;
     private ArrayList<Tweet> replies;
+    //TweetShow
+    @FXML
+    private Label timeShow;
+    @FXML
+    private Label tweet;
+    @FXML
+    private Label userName;
 
     /**
      * constructor
@@ -179,5 +188,11 @@ public class Tweet implements Serializable {
      */
     public ArrayList<Tweet> getReplies() {
         return replies;
+    }
+    @FXML
+    private void initialize() {
+        userName.setText(this.username);
+        tweet.setText(this.text);
+        timeShow.setText(this.time);
     }
 }

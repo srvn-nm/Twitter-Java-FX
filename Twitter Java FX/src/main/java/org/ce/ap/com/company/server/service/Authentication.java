@@ -8,7 +8,6 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,6 +31,10 @@ import javafx.scene.text.Text;
 
 public class Authentication implements AuthenticationService {
 
+    @FXML public Button sideMenuLogIn;
+    @FXML public Button sideMenuSignup;
+    @FXML public Button sideMenuSign2;
+    @FXML public Button sideMenuSign3;
     //Log In Section
     @FXML
     private Button CreateNewAccount;
@@ -108,10 +111,9 @@ public class Authentication implements AuthenticationService {
     @FXML
     private Text BioWarning;
 
-
-    public ArrayList<Account> twitterUsers = new ArrayList<Account>(); //this array will save all sign up users
-    private AccountFile usersFileManger = new AccountFile(); ;
-
+    public ArrayList<Account> twitterUsers = new ArrayList<>(); //this array will save all sign up users
+    private final AccountFile usersFileManger = new AccountFile();
+    private final ClientFileHandler clientFileHandler = new ClientFileHandler();
 
     //Log In Methods Section
     /**
@@ -121,36 +123,54 @@ public class Authentication implements AuthenticationService {
     public void LogInClick(ActionEvent event) {
         updateUsers();
         boolean UserNameCheck = usernameCheck(UserNameLogIn.getText());
-        System.out.println(UserNameLogIn.getText());
         boolean passwordCheck = passwordCheckForLogIn(PasswordLogIn.getText());
         if(UserNameCheck && passwordCheck){
-            // file status --> users ...
+            int clientNumber = clientFileHandler.getFxmlState("LogIn");
+            clientFileHandler.updateClient(clientNumber,"TimeLineShow");
         }
         if(!UserNameCheck){
             UserNameLogInWarning.setText("Invalid User Name !");
         }
+        if(UserNameCheck){
+            UserNameLogInWarning.setText("");
+        }
         if(!passwordCheck){
             PasswordLogInWarning.setText("Invalid password !");
         }
+        if(passwordCheck){
+            PasswordLogInWarning.setText("");
+
+        }
     }
 
-
+    /**
+     * this method will help us to control LogIn Fxml transition
+     * @param event ,
+     */
     public void SignUpLogButton(ActionEvent event) {
-
+        int clientNumber = clientFileHandler.getFxmlState("LogIn");
+        clientFileHandler.updateClient(clientNumber,"SignUpSecond");
     }
 
+    /**
+     * this method will help us to control LogIn Fxml transition
+     * @param event ,
+     */
     public void Exit(ActionEvent event) {
-        // file status --> users ...
+        int clientNumber = clientFileHandler.getFxmlState("LogIn");
+        clientFileHandler.updateClient(clientNumber,"FirstMenu");
     }
 
     //Sign up first section
-
     public void SecondSignUpLogButton(ActionEvent actionEvent) {
         boolean unRepeatedUsrName = usernameCheck(UserNameSignUp.getText());
         boolean PasswordSecurity = passwordQualityCheck(PasswordSignUp.getText());
         boolean PasswordCheck = passwordCheck(PasswordAgain.getText(),PasswordSignUp.getText());
         if(!unRepeatedUsrName && PasswordSecurity && PasswordCheck ){
-            //status
+            String UserData = UserNameSignUp.getText()+"\r\n" + PasswordSignUp.getText() +"\r\n"+ PasswordAgain.getText() ;
+            int clientNumber = clientFileHandler.getFxmlState("SignUpSecond");
+            clientFileHandler.updateClient(clientNumber,"SignUpFirst");
+            clientFileHandler.updateServerFXML(clientNumber,"SignUpSecond",UserData);
         }
         if(unRepeatedUsrName){
             UserNameSignUpWarning.setText("Error : Input userName is repeated");
@@ -166,15 +186,27 @@ public class Authentication implements AuthenticationService {
         }
     }
 
+    /**
+     * this mmetod will help us to control Fxml transition
+     * @param actionEvent
+     */
     public void BackToFirstMenu(ActionEvent actionEvent) {
-        //Status
+        int clientNumber = clientFileHandler.getFxmlState("SignUpSecond");
+        clientFileHandler.updateClient(clientNumber,"FirstMenu");
     }
 
     //Sign up second section name lastname and birthday
-
     public void BackToFirstSignUp(ActionEvent actionEvent) {
-        //second Back
+        int clientNumber = clientFileHandler.getFxmlState("SignUpFirst");
+        clientFileHandler.updateClient(clientNumber,"SignUpSecond");
     }
+
+    /**
+     * this method will handle :
+     * Sign up (name lastname ... )
+     * File saving
+     * @param actionEvent ,
+     */
     public void FirstSignUpLogButton(ActionEvent actionEvent) {
         boolean nameCheck = stringCheck(Name.getText());
         boolean lastNameCheck = stringCheck(LastName.getText());
@@ -190,7 +222,11 @@ public class Authentication implements AuthenticationService {
         boolean YearCheck = BirthDayYearCheck();
 
         if(nameCheck && lastNameCheck && !BirthDayStrDay && !BirthDayStrMonth && !BirthDayStrYear && DayCheck && MonthCheck && YearCheck ){
-            // file status --> users ...
+            String temp1 = Name.getText() +"\r\n" + LastName.getText() + "\r\n";
+            String UserData = temp1 + "\r\n" + Day.getText() +"\r\n" + Month.getText() +"\r\n" + Year.getText() ;
+            int clientNumber = clientFileHandler.getFxmlState("SignUpFirst");
+            clientFileHandler.updateClient(clientNumber,"SignUpSecond");
+            clientFileHandler.updateServerFXML(clientNumber,"SignUpFirst",UserData);
         }
         if(!nameCheck){
             NameWarning.setText("Input name is incorrect due to incorrect characters or numbers");
@@ -209,9 +245,30 @@ public class Authentication implements AuthenticationService {
         if(BirthDayStrYear){
             YearWarning.setText("date is Numeric");
         }
+        if(nameCheck){
+            NameWarning.setText("");
+        }
+        if(lastNameCheck){
+            LastNameWarning.setText("");
+        }
+        if(!BirthDayStrDay){
+            DayWarning.setText("");
+        }
+
+        if(!BirthDayStrMonth){
+            MonthWarning.setText("");
+        }
+
+        if(!BirthDayStrYear){
+            YearWarning.setText("");
+        }
 
     }
 
+    /**
+     * this method will help us to control birthday date
+     * @return toCheck
+     */
     private boolean BirthDayYearCheck() {
 
         int year = 0;
@@ -232,6 +289,10 @@ public class Authentication implements AuthenticationService {
         return toCheck;
     }
 
+    /**
+     * this method will help us to control birthday date
+     * @return toCheck
+     */
     private boolean BirthDayMonthCheck() {
 
         int month = 0;
@@ -252,6 +313,10 @@ public class Authentication implements AuthenticationService {
         return toCheck;
     }
 
+    /**
+     * this method will help us to control birthday date
+     * @return toCheck
+     */
     private boolean BirthDayDayCheck() {
 
         int month = 0;
@@ -293,12 +358,23 @@ public class Authentication implements AuthenticationService {
 
     //sign up third section
     public void BackToSecondSignUp(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("SignUpThird");
+        clientFileHandler.updateClient(clientNumber,"SignUpFirst");
     }
 
+    /***
+     * this method will help us to manage sign up event
+     * @param actionEvent ,
+     */
     public void SignUp(ActionEvent actionEvent) {
         boolean BioCheck = bioCheck(Bio.getText());
+        /////////////////////////////////////////////////////////////////////////////////////////////////////// Image File
         if(BioCheck){
-            //
+            String UserData =  Bio.getText() ;
+            int clientNumber = clientFileHandler.getFxmlState("SignUpThird");
+            clientFileHandler.updateClient(clientNumber,"TimeLine"); ////////////////////////////////////////////////// Time Line ...
+            clientFileHandler.updateServerFXML(clientNumber,"SignUpThird",UserData);
+            //clientFileHandler.NewUser(clientNumber);  --> use file to save all details
         }
         if(!BioCheck){
             BioWarning.setText("Bio len is more than 256 char limit");
@@ -331,7 +407,7 @@ public class Authentication implements AuthenticationService {
 
     /**
      * Here we check that our username is repeated or not .
-     * @param password
+     * @param password ,
      * @return toCheck (true --> repeated)
      */
     public boolean passwordCheckForLogIn(String password) {
@@ -351,9 +427,10 @@ public class Authentication implements AuthenticationService {
         }
         return toCheck;
     }
+
     /**
      * method to get the sha of a string
-     * @param input
+     * @param input ,
      * @return md.digest(input.getBytes(StandardCharsets.UTF_8))
      * @throws NoSuchAlgorithmException
      */
@@ -367,7 +444,7 @@ public class Authentication implements AuthenticationService {
 
     /**
      * method to convert a byte array a hexadecimal string value.
-     * @param hash
+     * @param hash ,
      * @return hexString.toString()
      */
     public static String toHexString(byte[] hash) {
@@ -387,7 +464,7 @@ public class Authentication implements AuthenticationService {
 
     /***
      * Here we check that our username is repeated or not .
-     * @param userName
+     * @param userName ,
      * @return toCheck (false --> repeated)
      */
     public boolean usernameCheck(String userName) {
@@ -504,4 +581,36 @@ public class Authentication implements AuthenticationService {
         twitterUsers.addAll(usersFileManger.AllUsers());
     }
 
+    //side menu button
+    /**
+     * this method will help us to manage side menu in log in
+     * @param actionEvent ,
+     */
+    public void sideMenuButton(ActionEvent actionEvent) {
+
+    }
+
+    /**
+     * this method will help us to manage side menu in sign 3
+     * @param actionEvent ,
+     */
+    public void sideMenuButtonSign3(ActionEvent actionEvent) {
+
+    }
+
+    /**
+     * this method will help us to manage side menu in sign 1
+     * @param actionEvent ,
+     */
+    public void sideMenuButtonSign1(ActionEvent actionEvent) {
+
+    }
+
+    /***
+     * this method will help us to manage side menu in sign 1
+     * @param actionEvent ,
+     */
+    public void sideMenuButtonSign2(ActionEvent actionEvent) {
+
+    }
 }
