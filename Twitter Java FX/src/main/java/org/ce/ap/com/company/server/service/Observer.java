@@ -44,10 +44,10 @@ public class Observer implements ObserverService {
      * ObserverService constructor will make a new list of twitterUsers
      */
 
-    public Observer() {
+    public Observer(ClientHandler clientHandler) {
         twitterUsers = new ArrayList<>();
         showingTable = new TimeLine();
-        tweeting = new Tweeting();
+        tweeting = new Tweeting(clientHandler);
         usersFileManger = new AccountFile();
     }
 

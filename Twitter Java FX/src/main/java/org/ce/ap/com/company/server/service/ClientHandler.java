@@ -61,7 +61,7 @@ public class ClientHandler extends Connections implements Runnable {
             byte[] buffer = new byte[2048];
             ArrayList<String> savedLine = new ArrayList<String>();
             int index = 0;
-            Twitter service = new Twitter(clientNum);
+            Twitter service = new Twitter(clientNum ,this);
             while (true) {
 
                 service.mainController(this, clientNum);

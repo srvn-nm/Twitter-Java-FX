@@ -1,77 +1,39 @@
 package org.ce.ap.com.company.server.service;
 
-
 import java.io.*;
 import java.util.ArrayList;
 
-
+/**
+ * this class will help us to control the fxml files and clients status
+ */
 public class ClientFileHandler {
 
-    private final String propertiesPath = "./src/resources/ClientStatusProperties/ClientProperties.txt";
+    //client status Properties
 
     /**
      * this method will open a new client status file
      * @param clientNumber ,
      */
     public void newClient(int clientNumber){
-        String path ="./src/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
+        String path ="./src/main/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
         File file = new File(path);
         try(FileWriter fileOutputStream = new FileWriter(file,false)){
-
-            fileOutputStream.write("FirstMenu");
+            fileOutputStream.write("FirstMenu.fxml");
         } catch (IOException e) {
             System.out.println("1");
         }
 
-        setPropertiesOfClients(path,true);
     }
 
-    /***
-     * this method will help us to set file properties
-     * @param path ,
-     * @param append ,
-     */
-    public void setPropertiesOfClients(String path,boolean append){
-        File propertiesFile = new File(propertiesPath);
-        boolean write = true;
-        if(append){
-            try (BufferedReader reader = new BufferedReader(new FileReader(propertiesFile))){
-                String Address ;
-                while ((Address = reader.readLine()) != null){
-                    if (Address.equals(path))
-                        write = false;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (write){
-                try(FileWriter fileOutputStream = new FileWriter(propertiesFile,true)){
-                    String temp = "\r\n";
-                    fileOutputStream.write(path+temp);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        else{
-            try(FileWriter fileOutputStream = new FileWriter(propertiesFile,false)){
-                String temp = "\r\n";
-                fileOutputStream.write(path+temp);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    /***
+    /*
      * this method will help us to update client Status
      * @param clientNumber ,
      * @param NewStatus ,
      */
     public void updateClient(int clientNumber,String NewStatus ){
-        String path ="./src/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
+        String path ="./src/main/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
         File file = new File(path);
+        NewStatus = NewStatus + ".fxml";
         try(FileWriter fileOutputStream = new FileWriter(file,false)){
             fileOutputStream.write(NewStatus);
         } catch (IOException e) {
@@ -85,7 +47,7 @@ public class ClientFileHandler {
      * @return client Status
      */
     public String getStatus(int clientNumber){
-        String path ="./src/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
+        String path ="./src/main/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
         File file = new File(path);
         String status = "FirstMenu.fxml" ;
         try(BufferedReader StatusFile = new BufferedReader(new FileReader(file))){
@@ -95,18 +57,19 @@ public class ClientFileHandler {
             }
         }
         catch (Exception error){
-            System.out.println("2");
+            System.out.println();
         }
 
         return status;
     }
 
+    //Current Client
     /**
      * this  method will help us to get the client number
      * @return clientNumber
      */
     public int getCurrentClient(){
-        String path = "src/main/resources/currentClient/CurrentClient.txt";
+        String path ="./src/main/resources/currentClient/CurrentClients.txt";
         int ClientNumber = 0 ;
         File file = new File(path);
         try(BufferedReader propertiesAddress = new BufferedReader(new FileReader(file))){
@@ -123,15 +86,16 @@ public class ClientFileHandler {
 
     }
 
-    /***
+    /*
      * this method will set current client number
      * @param currentClient ,
      */
     public void CurrentClient(int currentClient){
         String path ="./src/main/resources/currentClient/CurrentClients.txt";
         File file = new File(path);
+        String number = String.valueOf(currentClient);
         try(FileWriter fileOutputStream = new FileWriter(file,false)){
-            fileOutputStream.write(currentClient);
+            fileOutputStream.write(number);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,29 +122,29 @@ public class ClientFileHandler {
         return number;
     }
 
-    /***
+    /*
      * this method will update Fxml files for client
      * @param clientNumber ,
      * @param FxmlName ,
      * @param newMassage ,
      */
     public void updateServerFXML(int clientNumber,String FxmlName,String newMassage){
-        String path ="./src/resources/ServerClientFxml/"+FxmlName+"-"+clientNumber+".txt";
-        try(FileWriter fileOutputStream = new FileWriter(path,true)){
+        String path ="./src/main/resources/ServerClientFxml/"+FxmlName+"-"+clientNumber+".txt";
+        try(FileWriter fileOutputStream = new FileWriter(path,false)){
             fileOutputStream.write(newMassage);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /***
+    /*
      * this method will return Fxml details
      * @param clientNumber ,
      * @param FxmlName  ,
      * @return Fxml details
      */
     public ArrayList<String> getFXMLDetails(int clientNumber, String FxmlName){
-        String path ="./src/resources/ServerClientFxml/"+FxmlName+"-"+clientNumber+".txt";
+        String path ="./src/main/resources/ServerClientFxml/"+FxmlName+"-"+clientNumber+".txt";
         ArrayList<String> FXMLDetails = new ArrayList<>();
         File file = new File(path);
         try(BufferedReader propertiesAddress = new BufferedReader(new FileReader(file))){
@@ -195,28 +159,28 @@ public class ClientFileHandler {
         return FXMLDetails;
     }
 
-
     /**
      * this method will set Fxml client number
      * @param FxmlName ,
      * @param clientNumber ,
      */
     public void setAllFxmlsStats(String FxmlName,int clientNumber){
-        String path ="./src/resources/AllFxmlFiles/"+FxmlName+".txt";
-        try(FileWriter fileWriter = new FileWriter(path,true)){
-            fileWriter.write(clientNumber);
+        String path ="./src/main/resources/AllFxmlFiles/"+FxmlName+".txt";
+        String number = String.valueOf(clientNumber);
+        try(FileWriter fileWriter = new FileWriter(path,false)){
+            fileWriter.write(number);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /***
+    /*
      * this mehtod will get client number of fxml
      * @param FxmlName ,
      * @return fxml client number
      */
     public int getFxmlState(String FxmlName){
-        String path = "./src/resources/AllFxmlFiles/"+FxmlName+".txt";
+        String path = "./src/main/resources/AllFxmlFiles/"+FxmlName+".txt";
         int ClientNumber = 0 ;
         File file = new File(path);
         try(BufferedReader propertiesAddress = new BufferedReader(new FileReader(file))){

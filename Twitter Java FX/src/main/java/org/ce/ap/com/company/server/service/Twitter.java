@@ -78,11 +78,11 @@ public class Twitter implements TwitterService {
     /**
      *Server Constructor
      */
-    public Twitter(int clientNumber){
+    public Twitter(int clientNumber,ClientHandler clientHandler){
         service = new Authentication();
         twitterUsers = new ArrayList<>();
-        browser = new Observer();
-        tweeting = new Tweeting();
+        browser = new Observer(clientHandler);
+        tweeting = new Tweeting(clientHandler);
         showingTable = new TimeLine();
         usersFileManger = new AccountFile();
         chatRoom = new ChatRoom();

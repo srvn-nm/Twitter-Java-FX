@@ -1,9 +1,10 @@
 package org.ce.ap.com.company.server.service;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import org.ce.ap.com.company.server.impl.TweetingService;
@@ -28,12 +29,16 @@ public class Tweeting implements TweetingService {
     private final AccountFile usersFileManger ;
     private TimeLine timeLine;
     public ClientFileHandler clientFileHandler;
+    public ClientHandler clientHandler;
+    public String selectedTweet = "";
+    public ArrayList<Tweet> tweets = new ArrayList<Tweet>(timeLine.allTweets);
+    Account account;
     @FXML
     public Text UserName;
     @FXML public Button Reply;
     @FXML public Button Retweet;
     @FXML public Button Like;
-    @FXML public BorderPane massges;
+    @FXML public BorderPane massages;
     @FXML public Button Exit;
     @FXML public ScrollBar scroll;
     @FXML public Button Refresh;
@@ -41,12 +46,19 @@ public class Tweeting implements TweetingService {
     /**
      * constructor
      */
-    public Tweeting(){
+    public Tweeting(ClientHandler clientHandler){
         users = new ArrayList<>();
         tweetFile = new TweetFile();
         usersFileManger = new AccountFile();
         timeLine = new TimeLine();
         clientFileHandler = new ClientFileHandler();
+        for (Account a:users) {
+            if (a.getUserName().equals(UserName.getText())) {
+                account = a;
+                break;
+            }
+        }
+        this.clientHandler = clientHandler;
     }
     /**
      * THIS METHOD WILL LIKE A TWEET.
@@ -203,32 +215,117 @@ public class Tweeting implements TweetingService {
     public void update() {
         users.clear();
         users.addAll(usersFileManger.AllUsers());
+        for (Account a:users) {
+            if (a.getUserName().equals(UserName.getText())) {
+                account = a;
+                break;
+            }
+        }
 
+    }
+
+    public void TweetPreproccesor(){
+        tweets.clear();
+        tweets = new ArrayList<Tweet>(timeLine.allTweets);
+        // create a toggle group
+        ToggleGroup tg = new ToggleGroup();
+        // create radiobutton
+
+        for(Tweet t : tweets){
+            RadioButton r1 = new RadioButton(t.toString());
+            r1.setToggleGroup(tg);
+            massages.getChildren().add(r1);
+        }
+        // add a change listener
+        tg.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ob, Toggle o, Toggle n) {
+
+                RadioButton rb = (RadioButton)tg.getSelectedToggle();
+
+                if (rb != null) {
+
+                    // save the selected tweet
+                    selectedTweet = rb.getText();
+                }
+            }
+        });
     }
 
     @FXML
     public void ExitFX(ActionEvent event) {
-            int clientNumber = clientFileHandler.getFxmlState("LogIn");
-            clientFileHandler.updateClient(clientNumber,"TimeLineShow");
+        int clientNumber = clientFileHandler.getFxmlState("TimeLineShow");
+        clientFileHandler.updateClient(clientNumber,"LogOut");
     }
 
     @FXML
     public void LikeFX(ActionEvent event) {
-
+        Account ac = null;
+        int tweetNumber = 0;
+        for (Tweet t:tweets) {
+            if (t.toString().equals(selectedTweet)){
+                tweetNumber = tweets.indexOf(t);
+                break;
+            }
+        }
+        for (Account a:users) {
+            if (a.getUserName().equals(tweets.get(tweetNumber+1).getUsername())) {
+                ac = a;
+                break;
+            }
+        }
+        Like(tweets.get(tweetNumber+1),account,ac);
+        RefreshFX(event);
     }
 
     @FXML
     public void RefreshFX(ActionEvent event) {
-
+        timeLine.showTimeLine(UserName.getText(),clientHandler);
+        TweetPreproccesor();
     }
 
     @FXML
     public void ReplyFX(ActionEvent event) {
-
+        Account ac = null;
+        int tweetNumber = 0;
+        for (Tweet t:tweets) {
+            if (t.toString().equals(selectedTweet)){
+                tweetNumber = tweets.indexOf(t);
+                break;
+            }
+        }
+        for (Account a:users) {
+            if (a.getUserName().equals(tweets.get(tweetNumber+1).getUsername())) {
+                ac = a;
+                break;
+            }
+        }
+        reply(account,ac,tweets.get(tweetNumber+1),clientHandler);
+        RefreshFX(event);
     }
 
     @FXML
     public void RetweetFX(ActionEvent event) {
+        Account ac = null;
+        int tweetNumber = 0;
+        for (Tweet t:tweets) {
+            if (t.toString().equals(selectedTweet)){
+                tweetNumber = tweets.indexOf(t);
+                break;
+            }
+        }
+        for (Account a:users) {
+            if (a.getUserName().equals(tweets.get(tweetNumber+1).getUsername())) {
+                ac = a;
+                break;
+            }
+        }
+        retweet(account,ac,tweets.get(tweetNumber+1),clientHandler);
+        RefreshFX(event);
+    }
 
+    @FXML
+    public void initialize() {
+        timeLine.showTimeLine(UserName.getText(),clientHandler);
+        TweetPreproccesor();
     }
 }

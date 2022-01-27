@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface ObserverService {
     ArrayList<Account> twitterUsers = new ArrayList<>();
     TimeLine showingTable = new TimeLine();
-    Tweeting TWEETING = new Tweeting();
+    //Tweeting TWEETING = new Tweeting();
     AccountFile usersFileManger = new AccountFile();
     /**
      * print all Account will help  us
