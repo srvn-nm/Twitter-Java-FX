@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor" stylesheets="@applicationShowProfile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fxcode.twitterjavafx.OptionShow">
+   <children>
+      <Text layoutX="53.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Option">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="Exit" layoutX="155.0" layoutY="168.0" mnemonicParsing="false" text="Exit" />
+      <Button fx:id="Tray" layoutX="348.0" layoutY="168.0" mnemonicParsing="false" text="Tray" />
+   </children>
+</AnchorPane>

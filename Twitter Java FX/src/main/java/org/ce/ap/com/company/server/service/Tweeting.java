@@ -1,5 +1,7 @@
 package org.ce.ap.com.company.server.service;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import org.ce.ap.com.company.server.impl.TweetingService;
 import org.ce.ap.com.company.server.model.Account;
 import org.ce.ap.com.company.server.model.Tweet;
@@ -19,6 +21,10 @@ public class Tweeting implements TweetingService {
     public ArrayList<Account> users;
     private final TweetFile tweetFile;
     private final AccountFile usersFileManger ;
+    @FXML public Label userName;
+    @FXML public Label tweet;
+    @FXML public Label time;
+
     /**
      * constructor
      */

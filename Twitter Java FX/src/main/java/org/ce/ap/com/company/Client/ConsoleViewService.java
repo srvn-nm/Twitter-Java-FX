@@ -40,14 +40,14 @@ public class ConsoleViewService extends Application{
 
         if(FXMLAddress.equals("FirstMenu.fxml")){
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("FirstMenu.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Twitter");
             stage.setScene(scene);
             stage.show();
         }
         else if(FXMLAddress.equals("SignUpFirst.fxml")){
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("SignUpFirst.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Twitter");
             stage.setScene(scene);
             stage.show();
