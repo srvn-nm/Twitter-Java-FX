@@ -47,12 +47,18 @@ public class ClientHandler extends Connections implements Runnable {
         NewFile("./src/main/resources/ServerClientFxml/"+"SignUpFirst-"+clientNum+".txt");
         NewFile("./src/main/resources/ServerClientFxml/"+"SignUpSecond-"+clientNum+".txt");
         NewFile("./src/main/resources/ServerClientFxml/"+"SignUpThird-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"ApplicationShow-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"HelpShow-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"ShowProfile-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"TimeLineShow-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"TweetShow-"+clientNum+".txt");
+        NewFile("./src/main/resources/ServerClientFxml/"+"ViewShow-"+clientNum+".txt");
         //Client User Details
-        NewFile("./src/main/resources/ClientStatusProperties/"+"ClientUser-"+clientNum+".txt");
+        NewFile("./src/main/resources/ClientStatusProperties/"+"client-"+clientNum+".txt");
 
     }
 
-    /***
+    /*
      * create file with path
      * @param path ,
      */

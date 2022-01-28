@@ -100,7 +100,7 @@ public class Tweeting implements TweetingService {
         Tweet t = new Tweet();
         t.setUsername(un);
         t.setText(text,clientHandler);
-        Account user = new Account("","","");
+        Account user = new Account("","","","");
         for (Account ac:users) {
             if (ac.getUserName().equals(un)){
                 ac.tweets.add(t);
@@ -254,7 +254,7 @@ public class Tweeting implements TweetingService {
     @FXML
     public void ExitFX(ActionEvent event) {
         int clientNumber = clientFileHandler.getFxmlState("TimeLineShow");
-        clientFileHandler.updateClient(clientNumber,"LogOut");
+        clientFileHandler.updateClient(clientNumber,"FirstMenu");
     }
 
     @FXML

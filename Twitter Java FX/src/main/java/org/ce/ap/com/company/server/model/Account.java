@@ -34,7 +34,7 @@ public class Account implements Serializable {
     public ArrayList<Tweet> retweets;
     public ArrayList<Tweet> replies;
     public ArrayList<Tweet> likes;
-    private String pictureUrl = "";
+    private String pictureUrl;
     @Serial
     private static final long serialVersionUID = -5831173123415119657L;
 
@@ -44,7 +44,7 @@ public class Account implements Serializable {
      * @param lastName --> user last name
      * @param userName --> user username
      */
-    public Account(String name, String lastName, String userName) {
+    public Account(String name, String lastName, String userName, String pictureUrl) {
         this.name = name;
         this.lastName = lastName;
         this.userName = userName;
@@ -53,6 +53,23 @@ public class Account implements Serializable {
         retweets = new ArrayList<>();
         replies = new ArrayList<>();
         likes = new ArrayList<>();
+        this.pictureUrl = pictureUrl;
+    }
+
+    /**
+     * this method will return the user picture url.
+     * @return pictureUrl
+     */
+    public String getPictureUrl(){
+        return pictureUrl;
+    }
+
+    /**
+     * this method will set the user picture url.
+     * @param pictureUrl
+     */
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     /**

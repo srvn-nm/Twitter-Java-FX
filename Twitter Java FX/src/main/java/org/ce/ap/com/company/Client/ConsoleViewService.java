@@ -38,9 +38,11 @@ public class ConsoleViewService extends Application{
             System.out.println(FXMLAddress);
             System.out.println(fxmlLoader.getLocation());
             Scene scene = new Scene(fxmlLoader.load());
+            System.out.println("2");
             stage.setTitle("Twitter");
             stage.setScene(scene);
             stage.show();
+            System.out.println("1");
 
         }catch (Exception error){
             System.out.println();

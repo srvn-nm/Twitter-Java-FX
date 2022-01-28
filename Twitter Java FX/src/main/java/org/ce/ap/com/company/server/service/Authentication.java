@@ -31,6 +31,10 @@ import javafx.scene.text.Text;
 
 public class Authentication implements AuthenticationService {
 
+    public String image;
+
+    @FXML public Button sideMenuSign3;
+    @FXML public TextField ProfileImage;
     //Log In Section
     @FXML
     private Button CreateNewAccount;
@@ -365,11 +369,11 @@ public class Authentication implements AuthenticationService {
      */
     public void SignUp(ActionEvent actionEvent) {
         boolean BioCheck = bioCheck(Bio.getText());
-        /////////////////////////////////////////////////////////////////////////////////////////////////////// Image File
+        image = ProfileImage.getText();
         if(BioCheck){
-            String UserData =  Bio.getText() ;
+            String UserData =  Bio.getText() + "\r\n" + image;
             int clientNumber = clientFileHandler.getFxmlState("SignUpThird");
-            clientFileHandler.updateClient(clientNumber,"TimeLine"); ////////////////////////////////////////////////// Time Line ...
+            clientFileHandler.updateClient(clientNumber,"TimeLineShow");
             clientFileHandler.updateServerFXML(clientNumber,"SignUpThird",UserData);
             NewAccountFxmlFile(clientNumber);
         }
@@ -544,7 +548,7 @@ public class Authentication implements AuthenticationService {
     /**
      * Bio check will check the length of user Bio
      * @param bio ,
-     * @return tocheck (false --> Bio len is more than 256 char limit )
+     * @return to check (false --> Bio len is more than 256 char limit )
      */
     public boolean bioCheck(String bio) {
         boolean toCheck = true;
@@ -623,7 +627,7 @@ public class Authentication implements AuthenticationService {
         NewUsersDetails.addAll(clientFileHandler.getFXMLDetails(clientNumber,"SignUpSecond"));
         NewUsersDetails.addAll(clientFileHandler.getFXMLDetails(clientNumber,"SignUpFirst"));
         NewUsersDetails.addAll(clientFileHandler.getFXMLDetails(clientNumber,"SignUpThird"));
-        Account NewUser = new Account(NewUsersDetails.get(2),NewUsersDetails.get(3),NewUsersDetails.get(0));
+        Account NewUser = new Account(NewUsersDetails.get(2),NewUsersDetails.get(3),NewUsersDetails.get(0),NewUsersDetails.get(8));
         NewUser.setPassword(NewUsersDetails.get(1));
         String Date = NewUsersDetails.get(4) +"-" + NewUsersDetails.get(5) +"-" + NewUsersDetails.get(6) +"-" ;
         NewUser.setBirthDayDate(Date);

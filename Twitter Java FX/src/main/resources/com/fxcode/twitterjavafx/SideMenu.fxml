@@ -6,25 +6,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="Anchor" prefHeight="400.0" prefWidth="600.0" styleClass="sideMenu" stylesheets="@applicationShowProfile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fxcode.twitterjavafx.SideMenu">
+<AnchorPane fx:id="Anchor" prefHeight="400.0" prefWidth="600.0" styleClass="sideMenu" stylesheets="@applicationShowProfile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ce.ap.com.company.server.service.Twitter">
    <children>
-      <Button fx:id="Application" layoutX="67.0" layoutY="59.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: #1DA1F2;" text="Application" textFill="WHITE">
+      <Button fx:id="Application" layoutX="67.0" layoutY="59.0" mnemonicParsing="false" onAction="#ApplicationSelect" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: black;" text="Application" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="View" layoutX="67.0" layoutY="266.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: #1DA1F2;" text="View" textFill="WHITE">
+      <Button fx:id="View" layoutX="67.0" layoutY="266.0" mnemonicParsing="false" onAction="#ViewSelect" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: black;" text="View" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Options" layoutX="402.0" layoutY="266.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: #1DA1F2;" text="Options" textFill="WHITE">
+      <Button fx:id="Options" layoutX="402.0" layoutY="266.0" mnemonicParsing="false" onAction="#OptionSelect" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: black;" text="Options" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Help" layoutX="386.0" layoutY="59.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: #1DA1F2;" text="Help" textFill="WHITE">
+      <Button fx:id="Help" layoutX="386.0" layoutY="59.0" mnemonicParsing="false" onAction="#HeloSelect" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: black;" text="Help" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="14.0" />
          </font>

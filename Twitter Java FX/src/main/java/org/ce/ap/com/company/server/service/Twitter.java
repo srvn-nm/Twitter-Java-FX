@@ -1,6 +1,7 @@
 package org.ce.ap.com.company.server.service;
 
 import javafx.event.ActionEvent;
+import javafx.scene.layout.AnchorPane;
 import org.ce.ap.com.company.server.impl.TwitterService;
 import org.ce.ap.com.company.server.model.Account;
 import org.ce.ap.com.company.server.model.Errortype;
@@ -17,12 +18,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
+
 /**
  * sever class will help us to manage and control all the twitter sections
  */
 public class Twitter implements TwitterService {
 
     @FXML public Label welcomeText;
+    @FXML public Button Full;
+    @FXML public Button ExitApp;
+    @FXML public Button logOut;
     private Tweeting tweeting;
     private TimeLine showingTable;
     private final Authentication service;//log in and sign up service
@@ -36,6 +41,24 @@ public class Twitter implements TwitterService {
     private final Setting setting;
 
     private ClientFileHandler clientStatusHandler ; //client status handler
+
+    //Help menu
+    @FXML public Button About;
+    @FXML public AnchorPane AnchorH;
+    @FXML public Button HelpH;
+    @FXML public Label value;
+
+
+    //first side menu
+    @FXML public AnchorPane Anchor;
+    @FXML public Button Application;
+    @FXML public Button View;
+    @FXML public Button Options;
+    @FXML public Button Help;
+
+    //option menu
+    @FXML public Button Exit;
+    @FXML public Button Tray;
 
     //ChatRoomFirstMenu
     @FXML
@@ -56,7 +79,6 @@ public class Twitter implements TwitterService {
 
     //client Number
     int clientNumber;
-
 
 
     /**
@@ -305,5 +327,55 @@ public class Twitter implements TwitterService {
      * @param actionEvent ,
      */
     public void ChatRoomClickExit(ActionEvent actionEvent) {
+    }
+
+    public void ApplicationSelect(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("SideMenu");
+        clientStatusHandler.updateClient(clientNumber,"ApplicationShow");
+    }
+
+    public void ViewSelect(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("SideMenu");
+        clientStatusHandler.updateClient(clientNumber,"ViewShow");
+    }
+
+    public void OptionSelect(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("SideMenu");
+        clientStatusHandler.updateClient(clientNumber,"OptionShow");
+    }
+
+    public void HeloSelect(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("SideMenu");
+        clientStatusHandler.updateClient(clientNumber,"HelpShow");
+    }
+
+    public void ExitSelect(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("OptionShow");
+        clientStatusHandler.updateClient(clientNumber,"FirstMenu");
+    }
+
+    public void TraySelect(ActionEvent actionEvent) {
+//        String iconImageLoc = "../resources/Images/logo.png";
+        int clientNumber = clientStatusHandler.getFxmlState("OptionShow");
+        clientStatusHandler.updateClient(clientNumber,"OptionShow");
+    }
+
+    public void ContactUs(ActionEvent event) {
+        value.setText("SA GROUP\r\nAbtin Zandi -> 9931071 , abtin81@aut.ac.ir\r\nSarvin Nami -> 9931103 , srvn0nm@gmail.com");
+    }
+
+
+    public void SendHelp(ActionEvent event) {
+        value.setText("You can explore through the menus!");
+    }
+
+    public void Exit(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("ApplicationShow");
+        clientStatusHandler.updateClient(clientNumber,"FirstMenu");
+    }
+
+    public void wholeExit(ActionEvent actionEvent) {
+        int clientNumber = clientStatusHandler.getFxmlState("ApplicationShow");
+        clientStatusHandler.updateClient(clientNumber,"wholeExit");
     }
 }
