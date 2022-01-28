@@ -1,6 +1,6 @@
 package org.ce.ap.com.company.Client;
 
-import com.fxcode.twitterjavafx.HelloApplication;
+import com.example.twitterjavafx.HelloApplication;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,6 +38,7 @@ public class ConsoleViewService extends Application{
             System.out.println(FXMLAddress);
             System.out.println(fxmlLoader.getLocation());
             Scene scene = new Scene(fxmlLoader.load());
+           // Scene scene = new Scene(fxmlLoader.(getClass().getResource("/com/companyname/reports/" + report.getClass().getCanonicalName().substring(18).replaceAll("Controller", "") + ".fxml")));
             System.out.println("2");
             stage.setTitle("Twitter");
             stage.setScene(scene);
@@ -45,7 +46,7 @@ public class ConsoleViewService extends Application{
             System.out.println("1");
 
         }catch (Exception error){
-            System.out.println();
+            error.printStackTrace();
         }
 
     }

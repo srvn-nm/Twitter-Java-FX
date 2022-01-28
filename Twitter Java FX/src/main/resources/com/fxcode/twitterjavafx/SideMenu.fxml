@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="400.0" prefWidth="600.0" styleClass="sideMenu" stylesheets="@applicationShowProfile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ce.ap.com.company.server.service.Twitter">
+<AnchorPane fx:id="Anchor" prefHeight="400.0" prefWidth="600.0" styleClass="sideMenu" stylesheets="@applicationShowProfile.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.twitterjavafx.Twitter">
    <children>
       <Button fx:id="Application" layoutX="67.0" layoutY="59.0" mnemonicParsing="false" onAction="#ApplicationSelect" prefHeight="66.0" prefWidth="113.0" style="-fx-background-color: black;" text="Application" textFill="WHITE">
          <font>

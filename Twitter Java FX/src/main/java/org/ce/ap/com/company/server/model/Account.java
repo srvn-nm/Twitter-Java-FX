@@ -235,19 +235,14 @@ public class Account implements Serializable {
      *
      * @param user --> Unfollowed person
      */
-    public void Unfollow(Account user,ClientHandler clientHandler) {
+    public void Unfollow(Account user) {
         String usernameFollow = user.getUserName();
         Iterator<Account> it = following.iterator();
 
         while (it.hasNext()) {
             Account account = it.next();
             if (usernameFollow.equals(account.getUserName())) {
-                String Massage = "------------------------------------------------------------------\n"+account.toString()+"------------------------------------------------------------------\n";
-                clientHandler.outputStream(Massage+"Are you sure?\n1) yes\netc.No");
-                String sure = clientHandler.inputStream();
-                if (sure.equals("1")) {
-                    it.remove();
-                }
+                it.remove();
                 break;
             }
 

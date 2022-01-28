@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="486.0" prefWidth="696.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ce.ap.com.company.server.service.Authentication">
+<AnchorPane prefHeight="486.0" prefWidth="696.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.twitterjavafx.Authentication">
     <children>
         <TextField fx:id="Bio" alignment="TOP_LEFT" blendMode="SRC_ATOP" layoutX="91.0" layoutY="210.0" prefHeight="106.0" prefWidth="608.0" promptText="Bio">
             <font>
@@ -39,6 +39,6 @@
         <Text fx:id="BioWarning" fill="RED" layoutX="91.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="608.0000000000001" />
         <Text fx:id="imageWarning" fill="RED" layoutX="288.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="198.39999999999986" />
         <Button fx:id="sideMenuSign3" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" onAction="#sideMenuButtonSign3" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: bac0c3;" text="sideMenu" textFill="WHITE" />
-        <TextField fx:id="ProfileImage" layoutX="479.0" layoutY="344.0" prefHeight="25.0" prefWidth="228.0" promptText="Profile Image URL" />
+      <TextField fx:id="ProfileImage" layoutX="479.0" layoutY="344.0" prefHeight="25.0" prefWidth="228.0" promptText="Profile Image URL" />
     </children>
 </AnchorPane>

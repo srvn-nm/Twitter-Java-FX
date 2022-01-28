@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #657786;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ce.ap.com.company.server.service.Twitter">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #657786;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.twitterjavafx.Twitter">
    <children>
       <Button fx:id="logOut" layoutX="106.0" layoutY="146.0" mnemonicParsing="false" onAction="#Exit" prefHeight="107.0" prefWidth="116.0" style="-fx-background-color: #1DA1F2;" text="Log Out" />
       <Button fx:id="ExitApp" layoutX="339.0" layoutY="146.0" mnemonicParsing="false" onAction="#wholeExit" prefHeight="107.0" prefWidth="116.0" style="-fx-background-color: #1DA1F2;" text="Exit" />
