@@ -34,6 +34,7 @@ public class Account implements Serializable {
     public ArrayList<Tweet> retweets;
     public ArrayList<Tweet> replies;
     public ArrayList<Tweet> likes;
+    private String pictureUrl = "";
     @Serial
     private static final long serialVersionUID = -5831173123415119657L;
 

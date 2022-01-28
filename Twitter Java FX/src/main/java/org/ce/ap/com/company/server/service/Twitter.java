@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
  */
 public class Twitter implements TwitterService {
 
+    @FXML public Label welcomeText;
     private Tweeting tweeting;
     private TimeLine showingTable;
     private final Authentication service;//log in and sign up service

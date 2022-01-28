@@ -20,7 +20,7 @@ public class ClientFileHandler {
         String path ="./src/main/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
         File file = new File(path);
         try(FileWriter fileOutputStream = new FileWriter(file,false)){
-            fileOutputStream.write("FirstMenu.fxml");
+            fileOutputStream.write("FirstMenu");
         } catch (IOException e) {
             System.out.println("1");
         }
@@ -35,7 +35,6 @@ public class ClientFileHandler {
     public void updateClient(int clientNumber,String NewStatus ){
         String path ="./src/main/resources/ClientStatusProperties/"+"client-"+clientNumber+".txt";
         File file = new File(path);
-        NewStatus = NewStatus + ".fxml";
         try(FileWriter fileOutputStream = new FileWriter(file,false)){
             fileOutputStream.write(NewStatus);
         } catch (IOException e) {

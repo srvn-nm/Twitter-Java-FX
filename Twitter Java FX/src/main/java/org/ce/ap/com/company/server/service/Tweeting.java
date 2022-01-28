@@ -31,7 +31,7 @@ public class Tweeting implements TweetingService {
     public ClientFileHandler clientFileHandler;
     public ClientHandler clientHandler;
     public String selectedTweet = "";
-    public ArrayList<Tweet> tweets = new ArrayList<Tweet>(timeLine.allTweets);
+    public ArrayList<Tweet> tweets = new ArrayList<Tweet>();
     Account account;
     @FXML
     public Text UserName;
@@ -325,6 +325,8 @@ public class Tweeting implements TweetingService {
 
     @FXML
     public void initialize() {
+        int clientNumber = clientFileHandler.getFxmlState("TimeLineShow");
+        UserName.setText(clientFileHandler.getUserAccount(clientNumber));
         timeLine.showTimeLine(UserName.getText(),clientHandler);
         TweetProcessor();
     }
