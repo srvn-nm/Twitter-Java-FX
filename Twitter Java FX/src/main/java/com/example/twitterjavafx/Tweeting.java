@@ -31,6 +31,10 @@ public class Tweeting implements TweetingService {
     public ArrayList<Account> users;
     private final TweetFile tweetFile;
     private final AccountFile usersFileManger ;
+    @FXML public Button sideMenu;
+    @FXML public TextField Tweet;
+    @FXML public Button TweetButton;
+    @FXML public Text CreateWarning;
     private TimeLine timeLine;
     public ClientFileHandler clientFileHandler;
     public ClientHandler clientHandler;
@@ -333,5 +337,24 @@ public class Tweeting implements TweetingService {
         UserName.setText(clientFileHandler.getUserAccount(clientNumber));
         timeLine.showTimeLine(UserName.getText(),clientHandler);
         TweetProcessor();
+    }
+
+    /**
+     * this method is for creating a new tweet with the given text.
+     * @param actionEvent
+     */
+    public void TweetEvent(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("CreateTweet");
+        String userName = clientFileHandler.getUserAccount(clientNumber);
+        tweet(userName,Tweet.getText(),clientHandler);
+    }
+
+    /**
+     * this method will transfer to the side menu.
+     * @param actionEvent
+     */
+    public void sideMenuButtonCreate(ActionEvent actionEvent) {
+        int clientNumber = clientFileHandler.getFxmlState("CreateTweet");
+        clientFileHandler.updateClient(clientNumber,"sideMenu");
     }
 }

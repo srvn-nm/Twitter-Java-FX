@@ -7,3 +7,6 @@
 .help {
     -fx-background-image:url("../Images/im1.png");
 }
+.tweet {
+    -fx-background-image:url("../Images/images.png");
+}
